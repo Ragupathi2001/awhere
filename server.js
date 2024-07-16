@@ -45,7 +45,9 @@ app.post("/api/user-list", async (req, res) => {
     }
   } catch (error) {
     // Handle errors
-    res.status(error.response ? error.response.status : 500).json({ error: error.message });
+    res
+      .status(error.response ? error.response.status : 500)
+      .json({ error: error.message });
   }
 });
 
@@ -67,7 +69,8 @@ app.get("/api/search-contact", async (req, res) => {
 
 app.get("/api/login", async (req, res) => {
   const apiKey = "Bearer pat-na1-6a2f19d5-fb24-45c7-84af-6fb5d7644c5b";
-  const endpoint = "https://api.hubapi.com/contacts/v1/lists/all/contacts/all?property=firstname";
+  const endpoint =
+    "https://api.hubapi.com/contacts/v1/lists/all/contacts/all?property=firstname";
   const headers = {
     Authorization: apiKey,
   };
@@ -80,12 +83,10 @@ app.get("/api/login", async (req, res) => {
   }
 });
 
-
-
-app.post("/api/userdetails/:id", async (req, res) => {
+app.get("/api/userdetails/:id", async (req, res) => {
   const { id } = req.params;
-  
-  const apiKey = "Bearer pat-na1-6a2f19d5-fb24-45c7-84af-6fb5d7644c5b"; 
+
+  const apiKey = "Bearer pat-na1-6a2f19d5-fb24-45c7-84af-6fb5d7644c5b";
   const endpoint = `https://api.hubapi.com/crm/v3/objects/contacts/${id}?properties=userRole,Groups,dangermode,groupdangermode,profileimage,coverimage,email,firstname,lastname`;
 
   const headers = {
@@ -100,11 +101,6 @@ app.post("/api/userdetails/:id", async (req, res) => {
     res.status(error.response.status || 500).json({ error: error.message });
   }
 });
-
-
-
-
-
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
