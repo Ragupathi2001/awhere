@@ -105,3 +105,27 @@ app.get("/api/userdetails/:id", async (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
+
+
+app.post("/api/userdetails/:id", async (req, res) => {
+  const { id } = req.params;
+
+  const apiKey = "Bearer pat-na1-6a2f19d5-fb24-45c7-84af-6fb5d7644c5b";
+  const endpoint = `https://api.hubapi.com/crm/v3/objects/contacts/${id}?properties=userRole,Groups,dangermode,groupdangermode,profileimage,coverimage,email,firstname,lastname`;
+
+  const headers = {
+    Authorization: apiKey,
+  };
+
+  try {
+    const response = await axios.get(endpoint, { headers });
+    res.json(response.data);
+  } catch (error) {
+    console.error("Error fetching user details:", error);
+    res.status(error.response.status || 500).json({ error: error.message });
+  }
+});
+
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
+});
