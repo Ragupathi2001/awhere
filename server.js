@@ -83,7 +83,7 @@ app.get("/api/login", async (req, res) => {
   }
 });
 
-app.get("/api/userdetails/:id", async (req, res) => {
+app.get("/api/mapdetails/:id", async (req, res) => {
   const { id } = req.params;
 
   const apiKey = "Bearer pat-na1-6a2f19d5-fb24-45c7-84af-6fb5d7644c5b";
@@ -101,11 +101,6 @@ app.get("/api/userdetails/:id", async (req, res) => {
     res.status(error.response.status || 500).json({ error: error.message });
   }
 });
-
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
-
 
 app.post("/api/userdetails/:id", async (req, res) => {
   const { id } = req.params;
@@ -129,3 +124,5 @@ app.post("/api/userdetails/:id", async (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
+
+
